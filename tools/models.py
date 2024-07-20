@@ -17,7 +17,7 @@ def generate_title(min_length=1, max_length=999):
 
 class Response:
     """
-    Для быстрой замены библиотеки, которая используется для REQUEST
+    to quickly replace the library that is used for the REQUEST
     """
     def __init__(self, status: int, response: dict = None):
         self.status = status
@@ -26,7 +26,7 @@ class Response:
 
 class FavoritesData:
     """
-    Модели для тестов
+    Models for tests
     """
     @staticmethod
     def set_token(token):
