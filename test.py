@@ -27,7 +27,7 @@ TITLE_ERROR = [
 ]
 
 
-class TestRestApi:
+class TestApi:
     def test_add_random_favorite(self):
         response = Token(url=URL).get_token()
         assert response.status_code == OK, "Token response status is not 200"
