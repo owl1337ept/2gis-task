@@ -67,7 +67,7 @@ class TestApi:
         data = FavoritesData.set_little_title()
         response = Favorites(url=URL).set_favorites_standard(head=head, data=data, schema=error_schema)
         assert response.status_code == TYPE_ERROR, "Status code error"
-        assert response.json().get('error', {}).get('message', 'Unknown error') == TITLE_ERROR[0], ""
+        assert response.json().get('error', {}).get('message', 'Unknown error') == TITLE_ERROR[0], "Incorrect message"
 
         response = Token(url=URL).get_token()  #there may not be enough time
         assert response.status_code == OK, "Token response status is not 200"
