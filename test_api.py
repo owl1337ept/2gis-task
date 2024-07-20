@@ -17,7 +17,6 @@ class Token:
 
     def get_token(self):
         response = self.method.custom_request("POST", f"{self.url}{self.POST_TOKENS}")
-        logger.info(response.text)
         return response
 
 
@@ -34,5 +33,5 @@ class Favorites:
     def set_favorites_standard(self, head: dict, data: dict, schema: dict):
         response = self.method.custom_request("POST", f"{self.url}{self.POST_FAVORITES}", headers=head, data=data)
         validate(instance=response.json(), schema=schema)
-        logger.info(response.text)
+        logger.info(response.json())
         return response

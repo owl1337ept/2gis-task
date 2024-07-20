@@ -57,6 +57,14 @@ class FavoritesData:
         return {"title": title, "lat": lat, "lon": lon, "color": color}
 
     @staticmethod
+    def set_large_title():
+        title = 's' * random.randint(1001, 10000)
+        lat = fake.latitude()
+        lon = fake.longitude()
+        color = fake.random_element(elements=("BLUE", "GREEN", "RED", "YELLOW")) if fake.boolean() else None
+        return {"title": title, "lat": lat, "lon": lon, "color": color}
+
+    @staticmethod
     def set_wrong_negative_lat():
         title = generate_title()
         lat = -90.000001
@@ -97,11 +105,19 @@ class FavoritesData:
         return {"title": title, "lat": lat, "lon": lon, "color": color}
 
     @staticmethod
+    def set_combination_color():
+        title = generate_title()
+        lat = fake.latitude()
+        lon = fake.longitude()
+        color = "BLUEGREEN"
+        return {"title": title, "lat": lat, "lon": lon, "color": color}
+
+    @staticmethod
     def set_none_lat():
         title = generate_title()
         lat = None
         lon = fake.longitude()
-        color = "test"
+        color = fake.random_element(elements=("BLUE", "GREEN", "RED", "YELLOW")) if fake.boolean() else None
         return {"title": title, "lat": lat, "lon": lon, "color": color}
 
     @staticmethod
@@ -109,5 +125,15 @@ class FavoritesData:
         title = generate_title()
         lat = fake.latitude()
         lon = None
-        color = "test"
+        color = fake.random_element(elements=("BLUE", "GREEN", "RED", "YELLOW")) if fake.boolean() else None
         return {"title": title, "lat": lat, "lon": lon, "color": color}
+
+    # CURL can not encode special symbols
+    # @staticmethod
+    # def set_greek():
+    #     title = '\u0394'
+    #     lat = fake.latitude()
+    #     lon = fake.longitude()
+    #     color = fake.random_element(elements=("BLUE", "GREEN", "RED", "YELLOW")) if fake.boolean() else None
+    #     print(title)
+    #     return {"title": title, "lat": lat, "lon": lon, "color": color}
