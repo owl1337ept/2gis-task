@@ -1,6 +1,6 @@
 import time
-from rest_api import Token
-from rest_api import Favorites
+from test_api import Token
+from test_api import Favorites
 from tools.favorites import valid_schema
 from tools.favorites import error_schema
 from tools.models import FavoritesData
