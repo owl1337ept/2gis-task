@@ -55,7 +55,7 @@ class TestApi:
 
         response = Favorites(url=URL).set_favorites_standard(head=head, data=data, schema=error_schema)
         assert response.status_code == INSPIRED, "Status code error"
-        assert response.json().get('error', {}).get('message', 'Unknown error') == TOKEN_ERROR, "Неверное сообщение"
+        assert response.json().get('error', {}).get('message', 'Unknown error') == TOKEN_ERROR, "Incorrect message"
 
     # it makes no sense to test several invalid parameters, since they are processed sequentially
     def test_wrong_title(self):
@@ -67,7 +67,7 @@ class TestApi:
         data = FavoritesData.set_little_title()
         response = Favorites(url=URL).set_favorites_standard(head=head, data=data, schema=error_schema)
         assert response.status_code == TYPE_ERROR, "Status code error"
-        assert response.json().get('error', {}).get('message', 'Unknown error') == TITLE_ERROR[0], "Неверное сообщение"
+        assert response.json().get('error', {}).get('message', 'Unknown error') == TITLE_ERROR[0], ""
 
         response = Token(url=URL).get_token()  #there may not be enough time
         assert response.status_code == OK, "Token response status is not 200"
@@ -77,7 +77,7 @@ class TestApi:
         data = FavoritesData.set_big_title()
         response = Favorites(url=URL).set_favorites_standard(head=head, data=data, schema=error_schema)
         assert response.status_code == TYPE_ERROR, "Status code error"
-        assert response.json().get('error', {}).get('message', 'Unknown error') == TITLE_ERROR[1], "Неверное сообщение"
+        assert response.json().get('error', {}).get('message', 'Unknown error') == TITLE_ERROR[1], "Incorrect message"
 
         response = Token(url=URL).get_token()  # there may not be enough time
         assert response.status_code == OK, "Token response status is not 200"
@@ -87,7 +87,7 @@ class TestApi:
         data = FavoritesData.set_large_title()
         response = Favorites(url=URL).set_favorites_standard(head=head, data=data, schema=error_schema)
         assert response.status_code == TYPE_ERROR, "Status code error"
-        assert response.json().get('error', {}).get('message', 'Unknown error') == TITLE_ERROR[1], "Неверное сообщение"
+        assert response.json().get('error', {}).get('message', 'Unknown error') == TITLE_ERROR[1], "Incorrect message"
 
     def test_wrong_lat(self):
         response = Token(url=URL).get_token()
@@ -98,7 +98,7 @@ class TestApi:
         data = FavoritesData.set_wrong_negative_lat()
         response = Favorites(url=URL).set_favorites_standard(head=head, data=data, schema=error_schema)
         assert response.status_code == TYPE_ERROR, "Status code error"
-        assert response.json().get('error', {}).get('message', 'Unknown error') == LAT_ERROR[0], "Неверное сообщение"
+        assert response.json().get('error', {}).get('message', 'Unknown error') == LAT_ERROR[0], "Incorrect message"
 
         response = Token(url=URL).get_token()  #there may not be enough time
         assert response.status_code == OK, "Token response status is not 200"
@@ -108,7 +108,7 @@ class TestApi:
         data = FavoritesData.set_wrong_positive_lat()
         response = Favorites(url=URL).set_favorites_standard(head=head, data=data, schema=error_schema)
         assert response.status_code == TYPE_ERROR, "Status code error"
-        assert response.json().get('error', {}).get('message', 'Unknown error') == LAT_ERROR[1], "Неверное сообщение"
+        assert response.json().get('error', {}).get('message', 'Unknown error') == LAT_ERROR[1], "Incorrect message"
 
         response = Token(url=URL).get_token()  # there may not be enough time
         assert response.status_code == OK, "Token response status is not 200"
@@ -118,7 +118,7 @@ class TestApi:
         data = FavoritesData.set_none_lat()
         response = Favorites(url=URL).set_favorites_standard(head=head, data=data, schema=error_schema)
         assert response.status_code == TYPE_ERROR, "Status code error"
-        assert response.json().get('error', {}).get('message', 'Unknown error') == LAT_ERROR[2], "Неверное сообщение"
+        assert response.json().get('error', {}).get('message', 'Unknown error') == LAT_ERROR[2], "Incorrect message"
 
     def test_wrong_lon(self):
         response = Token(url=URL).get_token()
@@ -129,7 +129,7 @@ class TestApi:
         data = FavoritesData.set_wrong_negative_lon()
         response = Favorites(url=URL).set_favorites_standard(head=head, data=data, schema=error_schema)
         assert response.status_code == TYPE_ERROR, "Status code error"
-        assert response.json().get('error', {}).get('message', 'Unknown error') == LON_ERROR[0], "Неверное сообщение"
+        assert response.json().get('error', {}).get('message', 'Unknown error') == LON_ERROR[0], "Incorrect message"
 
         response = Token(url=URL).get_token()  #there may not be enough time
         assert response.status_code == OK, "Token response status is not 200"
@@ -139,7 +139,7 @@ class TestApi:
         data = FavoritesData.set_wrong_positive_lon()
         response = Favorites(url=URL).set_favorites_standard(head=head, data=data, schema=error_schema)
         assert response.status_code == TYPE_ERROR, "Status code error"
-        assert response.json().get('error', {}).get('message', 'Unknown error') == LON_ERROR[1], "Неверное сообщение"
+        assert response.json().get('error', {}).get('message', 'Unknown error') == LON_ERROR[1], "Incorrect message"
 
         response = Token(url=URL).get_token()  # there may not be enough time
         assert response.status_code == OK, "Token response status is not 200"
@@ -149,7 +149,7 @@ class TestApi:
         data = FavoritesData.set_none_lon()
         response = Favorites(url=URL).set_favorites_standard(head=head, data=data, schema=error_schema)
         assert response.status_code == TYPE_ERROR, "Status code error"
-        assert response.json().get('error', {}).get('message', 'Unknown error') == LON_ERROR[2], "Неверное сообщение"
+        assert response.json().get('error', {}).get('message', 'Unknown error') == LON_ERROR[2], "Incorrect message"
 
     def test_wrong_color(self):
         response = Token(url=URL).get_token()
@@ -160,7 +160,7 @@ class TestApi:
         data = FavoritesData.set_wrong_color()
         response = Favorites(url=URL).set_favorites_standard(head=head, data=data, schema=error_schema)
         assert response.status_code == TYPE_ERROR, "Status code error"
-        assert response.json().get('error', {}).get('message', 'Unknown error') == COLOR_ERROR, "Неверное сообщение"
+        assert response.json().get('error', {}).get('message', 'Unknown error') == COLOR_ERROR, "Incorrect message"
 
         response = Token(url=URL).get_token()
         assert response.status_code == OK, "Token response status is not 200"
@@ -170,7 +170,7 @@ class TestApi:
         data = FavoritesData.set_combination_color()
         response = Favorites(url=URL).set_favorites_standard(head=head, data=data, schema=error_schema)
         assert response.status_code == TYPE_ERROR, "Status code error"
-        assert response.json().get('error', {}).get('message', 'Unknown error') == COLOR_ERROR, "Неверное сообщение"
+        assert response.json().get('error', {}).get('message', 'Unknown error') == COLOR_ERROR, "Incorrect message"
 
 
     # CURL can not encode special symbols
