@@ -13,7 +13,7 @@ valid_schema = {
 error_schema = {
     "type": "object",
     "properties": {
-        "id": {"type": ["string", "number"]},
+        "id": {"type": "string"},
         'message': {"type": "string"}
     }
 }
