@@ -6,6 +6,7 @@ from tools.favorites import valid_schema
 from tools.favorites import error_schema
 from tools.models import FavoritesData
 
+
 URL = 'https://regions-test.2gis.com/v1'
 TYPE_ERROR = 400
 INSPIRED = 401
@@ -27,7 +28,6 @@ TITLE_ERROR = [
     "Параметр 'title' должен содержать не более 999 символов"
 ]
 
-# Helper function to get a token
 def get_token():
     response = Token(url=URL).get_token()
     assert response.status_code == OK, "Token response status is not 200"
@@ -112,4 +112,25 @@ def test_wrong_color(data, expected_error_message):
     response = Favorites(url=URL).set_favorites_standard(head=head, data=data, schema=error_schema)
     assert response.status_code == TYPE_ERROR, "Status code error"
     assert response.json().get('error', {}).get('message', 'Unknown error') == expected_error_message, "Incorrect message"
+
+
+# Combined test for valid lat and lon with simple rounding
+@pytest.mark.parametrize('data, expected_status_code', [
+    (FavoritesData.set_valid_lat_lon(), OK),
+    (FavoritesData.set_random_favorite(), OK)  # Add more cases as necessary
+])
+def test_valid_lat_lon(data, expected_status_code):
+    token = get_token()
+    head = FavoritesData.set_token(token=token)
+    response = Favorites(url=URL).set_favorites_standard(head=head, data=data, schema=valid_schema)
+    assert response.status_code == expected_status_code, "Status code error"
+    response_json = response.json()
+    expected_lat = round(float(data['lat']), 6)
+    expected_lon = round(float(data['lon']), 6)
+    actual_lat = round(float(response_json['lat']), 6)
+    actual_lon = round(float(response_json['lon']), 6)
+    assert -90 <= actual_lat <= 90, f"Latitude {actual_lat} is out of range"
+    assert -180 <= actual_lon <= 180, f"Longitude {actual_lon} is out of range"
+    assert actual_lat == expected_lat, f"Expected lat {expected_lat} but got {actual_lat}"
+    assert actual_lon == expected_lon, f"Expected lon {expected_lon} but got {actual_lon}"
 

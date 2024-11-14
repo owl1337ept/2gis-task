@@ -128,6 +128,15 @@ class FavoritesData:
         color = fake.random_element(elements=("BLUE", "GREEN", "RED", "YELLOW")) if fake.boolean() else None
         return {"title": title, "lat": lat, "lon": lon, "color": color}
 
+    @staticmethod
+    def set_valid_lat_lon():
+        title = generate_title()
+        lat = random.uniform(-90, 90)
+        lon = random.uniform(-180, 180)
+        color = fake.random_element(elements=("BLUE", "GREEN", "RED", "YELLOW")) if fake.boolean() else None
+        return {"title": title, "lat": lat, "lon": lon, "color": color}
+
+
     # CURL can not encode special symbols
     # @staticmethod
     # def set_greek():
